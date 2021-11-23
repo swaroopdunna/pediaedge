@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "pm_softspot_logo.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
