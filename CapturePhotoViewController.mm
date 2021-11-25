@@ -89,5 +89,6 @@
 
 - (void)onCloseModule {
     NSLog(@"onCloseModule - callback");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

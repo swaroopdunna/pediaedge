@@ -46,8 +46,11 @@ static NSString* model_file_type = @"lite";
 
 
 // If you have your own model, point this to the labels file.
+//static NSString* labels_file_name = @"edgelabels";
 static NSString* labels_file_name = @"labels";
 static NSString* labels_file_type = @"txt";
+
+
 
 // These dimensions need to match those the model was trained with.
 static const int wanted_input_width = 224;
@@ -304,7 +307,7 @@ static void GetTopN(const float* prediction, const int prediction_size, const in
 
 - (void)inputImageToModel:(image_data)image{
   float* out = interpreter->typed_input_tensor<float>(0);
-  
+
   const float input_mean = 127.5f;
   const float input_std = 127.5f;
   assert(image.channels >= wanted_input_channels);

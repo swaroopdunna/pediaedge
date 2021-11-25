@@ -67,6 +67,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kpp-CM-VVf"/>
+                    <connections>
+                        <outlet property="captureButton" destination="M2n-1z-eds" id="Wgp-0e-hJA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0vj-mL-56M" sceneMemberID="firstResponder"/>
             </objects>

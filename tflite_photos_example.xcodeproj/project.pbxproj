@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18374A02274FF772006F9F0F /* edgelabels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18374A01274FF772006F9F0F /* edgelabels.txt */; };
 		18BC2707274D623B00E13C9D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18BC2706274D623B00E13C9D /* Launch Screen.storyboard */; };
 		18BC2709274D71A700E13C9D /* edgemodel.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 18BC2708274D71A700E13C9D /* edgemodel.tflite */; };
 		18C0033D274D46D400205EB4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C0033A274D46D400205EB4 /* ViewController.m */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18374A01274FF772006F9F0F /* edgelabels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = edgelabels.txt; sourceTree = "<group>"; };
 		18683A1327441E6900A61A02 /* vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vector.h; path = ../../../../../../Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/Headers/LinearAlgebra/vector.h; sourceTree = "<group>"; };
 		18BC2706274D623B00E13C9D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		18BC2708274D71A700E13C9D /* edgemodel.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = edgemodel.tflite; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		59A3CFF31CF4E68100C4259F /* data */ = {
 			isa = PBXGroup;
 			children = (
+				18374A01274FF772006F9F0F /* edgelabels.txt */,
 				18BC2708274D71A700E13C9D /* edgemodel.tflite */,
 				2E12E3C72087CB8600FD9D4A /* graph.lite */,
 				AC1F82641FBA3CBD0052BA77 /* labels.txt */,
@@ -259,6 +262,7 @@
 				2E12E3C82087CB8600FD9D4A /* graph.lite in Resources */,
 				1C99111C1ED3B0E600A6BFB9 /* MainStoryboard_iPhone.storyboard in Resources */,
 				18BC2709274D71A700E13C9D /* edgemodel.tflite in Resources */,
+				18374A02274FF772006F9F0F /* edgelabels.txt in Resources */,
 				AC1F82661FBA3CBD0052BA77 /* labels.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
