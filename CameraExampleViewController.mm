@@ -38,16 +38,16 @@
 
 // If you have your own model, modify this to the file name, and make sure
 // you've added the file to your app resources too.
-//static NSString* model_file_name = @"edgemodel";
-//static NSString* model_file_type = @"tflite";
+static NSString* model_file_name = @"edgemodel";
+static NSString* model_file_type = @"tflite";
 
-static NSString* model_file_name = @"graph";
-static NSString* model_file_type = @"lite";
+//static NSString* model_file_name = @"graph";
+//static NSString* model_file_type = @"lite";
 
 
 // If you have your own model, point this to the labels file.
-//static NSString* labels_file_name = @"edgelabels";
-static NSString* labels_file_name = @"labels";
+static NSString* labels_file_name = @"edgelabels";
+//static NSString* labels_file_name = @"labels";
 static NSString* labels_file_type = @"txt";
 
 
@@ -87,23 +87,23 @@ static void LoadLabels(NSString* file_name, NSString* file_type,
 
 // Returns the top N confidence values over threshold in the provided vector,
 // sorted by confidence in descending order.
-static void GetTopN(const float* prediction, const int prediction_size, const int num_results,
-                    const float threshold, std::vector<std::pair<float, int>>* top_results) {
+static void GetTopN(const uint8_t* prediction, const int prediction_size, const int num_results,
+                    const float threshold, std::vector<std::pair<uint8_t, int>>* top_results) {
   // Will contain top N results in ascending order.
-  std::priority_queue<std::pair<float, int>, std::vector<std::pair<float, int>>,
-                      std::greater<std::pair<float, int>>>
+  std::priority_queue<std::pair<uint8_t, int>, std::vector<std::pair<uint8_t, int>>,
+                      std::greater<std::pair<uint8_t, int>>>
       top_result_pq;
 
   const long count = prediction_size;
   for (int i = 0; i < count; ++i) {
-    const float value = prediction[i];
+    const uint8_t value = prediction[i];
     // Only add it if it beats the threshold and has a chance at being in
     // the top N.
     if (value < threshold) {
       continue;
     }
 
-    top_result_pq.push(std::pair<float, int>(value, i));
+    top_result_pq.push(std::pair<uint8_t, int>(value, i));
 
     // If at capacity, kick the smallest value out.
     if (top_result_pq.size() > num_results) {
@@ -306,7 +306,7 @@ static void GetTopN(const float* prediction, const int prediction_size, const in
 }
 
 - (void)inputImageToModel:(image_data)image{
-  float* out = interpreter->typed_input_tensor<float>(0);
+    uint8_t* out = interpreter->typed_input_tensor<uint8_t>(0);
 
   const float input_mean = 127.5f;
   const float input_std = 127.5f;
@@ -316,11 +316,11 @@ static void GetTopN(const float* prediction, const int prediction_size, const in
   for (int y = 0; y < wanted_input_height; ++y) {
     const int in_y = (y * image.height) / wanted_input_height;
     uint8_t* in_row = in + (in_y * image.width * image.channels);
-    float* out_row = out + (y * wanted_input_width * wanted_input_channels);
+      uint8_t* out_row = out + (y * wanted_input_width * wanted_input_channels);
     for (int x = 0; x < wanted_input_width; ++x) {
       const int in_x = (x * image.width) / wanted_input_width;
       uint8_t* in_pixel = in_row + (in_x * image.channels);
-      float* out_pixel = out_row + (x * wanted_input_channels);
+        uint8_t* out_pixel = out_row + (x * wanted_input_channels);
       for (int c = 0; c < wanted_input_channels; ++c) {
         out_pixel[c] = (in_pixel[c] - input_mean) / input_std;
       }
@@ -343,14 +343,14 @@ static void GetTopN(const float* prediction, const int prediction_size, const in
   const int kNumResults = 5;
   const float kThreshold = 0.1f;
 
-  std::vector<std::pair<float, int>> top_results;
+  std::vector<std::pair<uint8_t, int>> top_results;
 
-  float* output = interpreter->typed_output_tensor<float>(0);
+    uint8_t* output = interpreter->typed_output_tensor<uint8_t>(0);
   GetTopN(output, output_size, kNumResults, kThreshold, &top_results);
   
-  std::vector<std::pair<float, std::string>> newValues;
+  std::vector<std::pair<uint8_t, std::string>> newValues;
   for (const auto& result : top_results) {
-    std::pair<float, std::string> item;
+    std::pair<uint8_t, std::string> item;
     item.first = result.first;
     item.second = labels[result.second];
     
@@ -424,7 +424,7 @@ static void GetTopN(const float* prediction, const int prediction_size, const in
   return YES;
 }
 
-- (void)setPredictionValues:(std::vector<std::pair<float, std::string>>)newValues {
+- (void)setPredictionValues:(std::vector<std::pair<uint8_t, std::string>>)newValues {
 
   const float leftMargin = 10.0f;
   const float topMargin = 10.0f;
