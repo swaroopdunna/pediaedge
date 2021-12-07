@@ -38,7 +38,7 @@ typedef struct {
   CALayer* previewLayer;
   UIView* flashView;
   NSMutableArray* labelLayers;
-
+    NSMutableDictionary* oldPredictionValues;
 
   std::vector<std::string> labels;
   std::unique_ptr<tflite::FlatBufferModel> model;
