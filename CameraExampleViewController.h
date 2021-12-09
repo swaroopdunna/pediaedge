@@ -33,29 +33,31 @@ typedef struct {
 
 
 @interface CameraExampleViewController
-    : UIViewController<UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate> {
-  IBOutlet UIView* previewView;
-  CALayer* previewLayer;
-  UIView* flashView;
-  NSMutableArray* labelLayers;
+: UIViewController<UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate> {
+    IBOutlet UIView* previewView;
+    __weak IBOutlet UIButton *homeButton;
+    __weak IBOutlet UIButton *nextButton;
+    CALayer* previewLayer;
+    UIView* flashView;
+    NSMutableArray* labelLayers;
     NSMutableDictionary* oldPredictionValues;
-
-  std::vector<std::string> labels;
-  std::unique_ptr<tflite::FlatBufferModel> model;
-  tflite::ops::builtin::BuiltinOpResolver resolver;
-  std::unique_ptr<tflite::Interpreter> interpreter;
-
-  double total_latency;
-  int total_count;
-        
-  int photos_index;
-  PHFetchResult *photos;
-  
-  UIImage* input_image;
-  UIImage* display_image;
+    
+    std::vector<std::string> labels;
+    std::unique_ptr<tflite::FlatBufferModel> model;
+    tflite::ops::builtin::BuiltinOpResolver resolver;
+    std::unique_ptr<tflite::Interpreter> interpreter;
+    
+    double total_latency;
+    int total_count;
+    
+    int photos_index;
+    PHFetchResult *photos;
+    
+    UIImage* input_image;
+    UIImage* display_image;
 }
 @property(strong, nonatomic) CATextLayer* predictionTextLayer;
-
+- (IBAction)homeButtonAction:(id)sender;
 - (IBAction)takePicture:(id)sender;
 @end
 

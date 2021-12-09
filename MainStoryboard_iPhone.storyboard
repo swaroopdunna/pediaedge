@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +12,10 @@
         <scene sceneID="Fjz-B3-zm3">
             <objects>
                 <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xdv-Ql-Mfb" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Hh-rZ-Dm4"/>
+                        <viewControllerLayoutGuide type="bottom" id="SSg-fG-POF"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9iI-Ks-vef">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,7 +57,6 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="ChV-Bl-3wc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="M2n-1z-eds" firstAttribute="top" secondItem="arc-ji-Xu2" secondAttribute="bottom" constant="50" id="2bZ-p8-95A"/>
@@ -79,10 +81,13 @@
         <scene sceneID="5Ie-Jy-u0m">
             <objects>
                 <viewController storyboardIdentifier="CapturePhotoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Udx-J7-MMw" customClass="CapturePhotoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cg0-XS-UvK"/>
+                        <viewControllerLayoutGuide type="bottom" id="udF-Eb-pcx"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pfn-0Z-ZnO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="GLS-iX-o8K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
@@ -95,8 +100,8 @@
             <objects>
                 <viewController storyboardIdentifier="CameraExampleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="G1z-QV-eK1" customClass="CameraExampleViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="LH3-to-bD4"/>
-                        <viewControllerLayoutGuide type="bottom" id="fHg-H8-OI7"/>
+                        <viewControllerLayoutGuide type="top" id="Pi7-xN-Jue"/>
+                        <viewControllerLayoutGuide type="bottom" id="VpY-cF-s4P"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QPP-dO-lHV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -124,16 +129,35 @@
                                     <action selector="takePicture:" destination="G1z-QV-eK1" eventType="touchUpInside" id="u9y-Ni-7GB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VJU-3f-iho">
+                                <rect key="frame" x="265" y="10" width="100" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="nx0-BV-hBn"/>
+                                    <constraint firstAttribute="height" constant="40" id="yb6-45-23H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
+                                <state key="normal" title="Home">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="homeButtonAction:" destination="G1z-QV-eK1" eventType="touchUpInside" id="d4d-ui-ZiF"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="3SF-IB-6fK"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3SF-IB-6fK" firstAttribute="bottom" secondItem="MGU-Tc-YJo" secondAttribute="bottom" constant="60" id="WTX-pc-u60"/>
-                            <constraint firstItem="MGU-Tc-YJo" firstAttribute="leading" secondItem="3SF-IB-6fK" secondAttribute="leading" constant="30" id="mRp-2z-8Ze"/>
-                            <constraint firstItem="3SF-IB-6fK" firstAttribute="trailing" secondItem="MGU-Tc-YJo" secondAttribute="trailing" constant="30" id="rER-e3-FzC"/>
+                            <constraint firstAttribute="trailing" secondItem="VJU-3f-iho" secondAttribute="trailing" constant="10" id="LLi-Jb-n10"/>
+                            <constraint firstItem="VpY-cF-s4P" firstAttribute="top" secondItem="MGU-Tc-YJo" secondAttribute="bottom" constant="60" id="WTX-pc-u60"/>
+                            <constraint firstItem="VJU-3f-iho" firstAttribute="top" secondItem="Pi7-xN-Jue" secondAttribute="bottom" constant="10" id="Z3W-E1-hIg"/>
+                            <constraint firstItem="MGU-Tc-YJo" firstAttribute="leading" secondItem="QPP-dO-lHV" secondAttribute="leading" constant="30" id="mRp-2z-8Ze"/>
+                            <constraint firstAttribute="trailing" secondItem="MGU-Tc-YJo" secondAttribute="trailing" constant="30" id="rER-e3-FzC"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="homeButton" destination="VJU-3f-iho" id="y23-0i-2A6"/>
+                        <outlet property="nextButton" destination="MGU-Tc-YJo" id="GjW-MA-Tao"/>
                         <outlet property="previewView" destination="VBq-ui-cCJ" id="Cgr-sW-1Sw"/>
                     </connections>
                 </viewController>
