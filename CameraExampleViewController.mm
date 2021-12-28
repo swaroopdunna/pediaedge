@@ -430,7 +430,7 @@ void ProcessInputWithQuantizedModel(
     }
     const int output_size = output_dims->data[1];
     
-    const int kNumResults = 5;
+    const int kNumResults = 2;
     const float kThreshold = 0.1f;
     
     std::vector<std::pair<float, int> > top_results;
@@ -438,10 +438,12 @@ void ProcessInputWithQuantizedModel(
     if (is_quantized) {
         uint8_t* quantized_output = interpreter->typed_output_tensor<uint8_t>(0);
         int32_t zero_point = input_tensor->params.zero_point;
-        float scale = input_tensor->params.scale;
+        //float scale = input_tensor->params.scale;
+        float scale = 0.01;
         std::vector<float> output(output_size);
         for (int i = 0; i < output_size; ++i) {
-            output[i] = (quantized_output[i] - zero_point) * scale;
+            //output[i] = (quantized_output[i] - zero_point) * scale;
+            output[i] = quantized_output[i]*scale;
         }
         GetTopN(output.data(), output_size, kNumResults, kThreshold, &top_results);
     } else {
@@ -590,17 +592,19 @@ void ProcessInputWithQuantizedModel(
         const float newPredictionValue = [newPredictionValueObject floatValue];
         const float oldPredictionValue = [oldPredictionValueObject floatValue];
         const float updatedPredictionValue = (oldPredictionValue + (newPredictionValue * updateValue));
-        NSNumber* updatedPredictionValueObject = [NSNumber numberWithFloat:updatedPredictionValue];
+        //NSNumber* updatedPredictionValueObject = [NSNumber numberWithFloat:updatedPredictionValue];
+        NSNumber* updatedPredictionValueObject = [NSNumber numberWithFloat:newPredictionValue];
+
         [oldPredictionValues setObject:updatedPredictionValueObject forKey:label];
     }
     NSArray* candidateLabels = [NSMutableArray array];
     for (NSString* label in oldPredictionValues) {
         NSNumber* oldPredictionValueObject = [oldPredictionValues objectForKey:label];
         const float oldPredictionValue = [oldPredictionValueObject floatValue];
-        if (oldPredictionValue > 0.05f) {
+        //if (oldPredictionValue > 0.05f) {
             NSDictionary* entry = @{@"label" : label, @"value" : oldPredictionValueObject};
             candidateLabels = [candidateLabels arrayByAddingObject:entry];
-        }
+        //}
     }
     NSSortDescriptor* sort = [NSSortDescriptor sortDescriptorWithKey:@"value" ascending:NO];
     NSArray* sortedLabels =
@@ -626,7 +630,7 @@ void ProcessInputWithQuantizedModel(
         NSNumber* valueObject = [entry objectForKey:@"value"];
         const float value = [valueObject floatValue];
         const float originY = topMargin + ((labelHeight + labelMarginY) * labelCount);
-        const int valuePercentage = (int)roundf(value * 100.0f);
+        const int valuePercentage = (int)roundf(((value * 100.0f)/256.0f)* 100.0f);
         
         const float valueOriginX = leftMargin;
         NSString* valueText = [NSString stringWithFormat:@"%d%%", valuePercentage];
